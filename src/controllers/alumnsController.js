@@ -46,6 +46,22 @@ class AlumnController {
       });
     }
   };
+  
+  static delete = async function (req, res) {
+    const {id} = req.params;
+    
+    try {
+      await alumns.findByIdAndDelete(id);
+      res.status(204).json{
+        message: 'Deleted successfully';
+      }
+    } catch (error) {
+      res.status(404).json({
+        error: `${error.message}`,
+      });
+      
+    }
+  };
 }
 
 export default AlumnController;
