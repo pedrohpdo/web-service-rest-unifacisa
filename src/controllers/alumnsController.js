@@ -52,9 +52,9 @@ class AlumnController {
     
     try {
       await alumns.findByIdAndDelete(id);
-      res.status(204).json{
+      res.status(204).json({
         message: 'Deleted successfully';
-      }
+      })
     } catch (error) {
       res.status(404).json({
         error: `${error.message}`,
