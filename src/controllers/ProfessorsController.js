@@ -1,4 +1,4 @@
-import professors from "../models/Professor";
+import professors from "../models/Professor.js";
 
 class AlumnController {
   static findAll = async function (req, res) {
@@ -23,11 +23,13 @@ class AlumnController {
   };
 
   static insert = async function (req, res) {
+    let newProfessor = new professors(req.body);
+
     try {
-      await professors.create(req.body);
-      res.status(201).json({
-        message: 'Created',
-      });
+      await professors.create(newProfessor);
+      res.status(201).send(
+        newProfessor.toJSON()
+      );
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
