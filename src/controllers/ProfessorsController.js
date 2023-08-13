@@ -1,6 +1,6 @@
-import professors from "../models/Professor.js";
+import professors from '../models/Professor.js';
 
-class AlumnController {
+class ProfessorController {
   static findAll = async function (req, res) {
     try {
       const result = await professors.find({}).exec();
@@ -27,9 +27,7 @@ class AlumnController {
 
     try {
       await professors.create(newProfessor);
-      res.status(201).send(
-        newProfessor.toJSON()
-      );
+      res.status(201).send(newProfessor.toJSON());
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
@@ -38,7 +36,7 @@ class AlumnController {
   };
 
   static alter = async function (req, res) {
-    const id = req.params.id;
+    const { id } = req.params;
     try {
       await professors.findByIdAndUpdate(id, req.body);
       res.status(200).send('fé');
@@ -48,22 +46,21 @@ class AlumnController {
       });
     }
   };
-  
+
   static delete = async function (req, res) {
-    const {id} = req.params;
-    
+    const { id } = req.params;
+
     try {
       await professors.findByIdAndDelete(id);
       res.status(204).json({
-        message: 'Deleted successfully'
-      })
+        message: 'Deleted successfully',
+      });
     } catch (error) {
       res.status(404).json({
         error: `${error.message}`,
       });
-      
     }
   };
 }
 
-export default AlumnController;
+export default ProfessorController;

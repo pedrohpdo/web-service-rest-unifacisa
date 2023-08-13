@@ -26,9 +26,7 @@ class AlumnController {
     let newAlumn = new alumns(req.body);
     try {
       await alumns.create(newAlumn);
-      res.status(201).send(
-        newAlumn.toJSON()
-      );
+      res.status(201).send(newAlumn.toJSON());
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
@@ -47,20 +45,19 @@ class AlumnController {
       });
     }
   };
-  
+
   static delete = async function (req, res) {
-    const {id} = req.params;
-    
+    const { id } = req.params;
+
     try {
       await alumns.findByIdAndDelete(id);
       res.status(204).json({
-        message: 'Deleted successfully'
-      })
+        message: 'Deleted successfully',
+      });
     } catch (error) {
       res.status(404).json({
         error: `${error.message}`,
       });
-      
     }
   };
 }
