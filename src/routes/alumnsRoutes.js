@@ -4,6 +4,6 @@ import AlumnController from '../controllers/alumnsController.js';
 const router = express.Router();
 router.get('/', AlumnController.findAll);
 router.get('/:id', AlumnController.findById);
-router.post('/', AlumnController.insertAlumns);
-router.put('/:id', AlumnController.alterAlumn);
+router.post('/', AlumnController.insert);
+router.put('/:id', AlumnController.alter);
 export default router;

@@ -11,7 +11,7 @@ class AlumnController {
   };
 
   static findById = async function (req, res) {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
       const result = await alumns.findById(id).exec();
       res.status(200).json(result);
@@ -22,7 +22,7 @@ class AlumnController {
     }
   };
 
-  static insertAlumns = async function (req, res) {
+  static insert = async function (req, res) {
     try {
       await alumns.create(req.body);
       res.status(201).json({
@@ -35,12 +35,11 @@ class AlumnController {
     }
   };
 
-  static alterAlumn = async function (req, res) {
+  static alter = async function (req, res) {
     const id = req.params.id;
     try {
       await alumns.findByIdAndUpdate(id, req.body);
-      res.status(200).send("fé");
-
+      res.status(200).send('fé');
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
