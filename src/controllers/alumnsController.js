@@ -23,11 +23,12 @@ class AlumnController {
   };
 
   static insert = async function (req, res) {
+    let newAlumn = new alumns(req.body);
     try {
-      await alumns.create(req.body);
-      res.status(201).json({
-        message: 'Created',
-      });
+      await alumns.create(newAlumn);
+      res.status(201).send(
+        newAlumn.toJSON()
+      );
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
