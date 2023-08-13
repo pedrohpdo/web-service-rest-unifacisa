@@ -1,6 +1,5 @@
 import express from 'express';
 import dbConnection from './config/dbConnect.js';
-import alumns from './models/Alumn.js';
 import routes from './routes/index.js';
 
 const app = express();
