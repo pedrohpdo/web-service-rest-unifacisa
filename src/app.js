@@ -14,12 +14,6 @@ dbConnection.once('open', function () {
 
 routes(app);
 
-// app.put('/:id', function (req, res) {
-//   let index = search(req.params.id);
-//   alumns[index].name = req.body.name;
-//   res.status(200).json(alumns);
-// });
-
 app.delete('/:id', function (req, res) {
   let index = search(req.params.id);
   alumns.splice(index, 1);
