@@ -10,8 +10,6 @@ Um verdadeiro caos (kkkkkkk), pra quem codava em Java até "Um dia desses", sent
 
 Não tem tanta complexidade, até o momento segue uma implementação de uma API REST Utilizando Node.js com Express() e MongoDB como base de dados utilizando as funções do CRUD que já conhecemos.
 
-<hr>
-
 ## Pontos Importantes (Estudos)
 
 <p>Posso deixar elencando alguns pontos interessantes que acabei me deparando com a implementação dessa api. Como o node utiliza de muitas libs auxiliares que valem a menção, já que segue sendo meu primeiro contato:</p>
@@ -23,8 +21,6 @@ Não tem tanta complexidade, até o momento segue uma implementação de uma API
 </p>
 
 [Acesse a documentação do Mongoose](https://mongoosejs.com/)
-
-<hr>
 
 ## Referências;
 
