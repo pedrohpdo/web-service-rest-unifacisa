@@ -5,7 +5,7 @@ class AlumnController {
     try {
       const result = await alumns
         .find({})
-        .populate({ path: 'professor', select: 'name class' })
+        .populate({ path: 'professor', select: "class" })
         .exec();
       res.status(200).json(result);
     } catch (error) {
@@ -18,7 +18,7 @@ class AlumnController {
     try {
       const result = await alumns
         .findById(id)
-        .populate({ path: 'professor', select: 'name class mail' })
+        .populate({ path: 'professor', select: 'class' })
         .exec();
       res.status(200).json(result);
     } catch (error) {
@@ -44,7 +44,7 @@ class AlumnController {
     const id = req.params.id;
     try {
       await alumns.findByIdAndUpdate(id, req.body);
-      res.status(200).send('fé');
+      res.sendStatus(200);
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,

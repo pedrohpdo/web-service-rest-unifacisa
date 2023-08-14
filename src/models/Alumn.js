@@ -8,7 +8,7 @@ const alumnSchema = new Schema({
   name: { type: String, require: true },
   surname: { type: String, require: true },
   mail: { type: String, required: true },
-  professor: { type: Schema.Types.ObjectId, ref: 'Professor', required: true}
+  professor: { type: Schema.Types.ObjectId, ref: 'Professor', require: true }
 });
 
 const alumns = mongoose.model('Alumn', alumnSchema);
