@@ -5,7 +5,7 @@ class AlumnController {
     try {
       const result = await alumns
         .find({})
-        .populate({ path: 'professor', select: "class" })
+        .populate({ path: 'professor', select: 'class' })
         .exec();
       res.status(200).json(result);
     } catch (error) {
@@ -20,6 +20,18 @@ class AlumnController {
         .findById(id)
         .populate({ path: 'professor', select: 'class' })
         .exec();
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(404).json({
+        error: `${error.message}`,
+      });
+    }
+  };
+
+  static findByParam = async function (req, res) {
+    const idParam = req.query.professorId;
+    try {
+      const result = await alumns.find({ professor: idParam }).exec();
       res.status(200).json(result);
     } catch (error) {
       res.status(404).json({
