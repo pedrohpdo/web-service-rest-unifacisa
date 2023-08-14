@@ -11,3 +11,8 @@ Não tem tanta complexidade, na verdade estou estudando o mesmo assunto, mas com
 
 ## Referências;
 Com toda certeza, os conteúdos da [Alura](https://www.instagram.com/aluraonline/) estão salvando demais. Completamente objetivo mas sem perder o foco em te dar uma boa base, fora os [infinitos artigos](https://www.alura.com.br/artigos) que eles disponibilizam em sua plataforma, com certeza recomendo.
+
+## Tecnologias Usadas
+    Javascript
+    Node.js
+    MongoDB
