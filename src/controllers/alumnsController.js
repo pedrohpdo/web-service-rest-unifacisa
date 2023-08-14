@@ -3,7 +3,10 @@ import alumns from '../models/Alumn.js';
 class AlumnController {
   static findAll = async function (req, res) {
     try {
-      const result = await alumns.find({}).populate("professor", "name").exec();
+      const result = await alumns
+        .find({})
+        .populate({ path: 'professor', select: 'name class' })
+        .exec();
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error: `${error.message}` });
@@ -13,7 +16,10 @@ class AlumnController {
   static findById = async function (req, res) {
     const { id } = req.params;
     try {
-      const result = await alumns.findById(id).populate('professor', 'name').exec();
+      const result = await alumns
+        .findById(id)
+        .populate({ path: 'professor', select: 'name class mail' })
+        .exec();
       res.status(200).json(result);
     } catch (error) {
       res.status(404).json({
