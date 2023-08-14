@@ -31,7 +31,7 @@ class AlumnController {
   static findByParam = async function (req, res) {
     const idParam = req.query.professorId;
     try {
-      const result = await alumns.find({ professor: idParam }).exec();
+      const result = await alumns.find({ professor: idParam }).populate({path : 'professor', select : 'class'}).exec();
       res.status(200).json(result);
     } catch (error) {
       res.status(404).json({
