@@ -33,7 +33,7 @@ class AlumnController {
         }
     };
 
-    static findByParam = async function (req, res) {
+    static findByParam = async function (req, res, next) {
         const idParam = req.query.professorId;
         try {
             const result = await alumns
@@ -49,7 +49,7 @@ class AlumnController {
         }
     };
 
-    static insert = async function (req, res) {
+    static insert = async function (req, res, next) {
         let newAlumn = new alumns(req.body);
         try {
             await alumns.create(newAlumn);
@@ -61,7 +61,7 @@ class AlumnController {
         }
     };
 
-    static alter = async function (req, res) {
+    static alter = async function (req, res, next) {
         const id = req.params.id;
         try {
             await alumns.findByIdAndUpdate(id, req.body);
