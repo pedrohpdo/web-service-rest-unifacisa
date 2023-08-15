@@ -8,7 +8,7 @@ app.use(express.json());
 dbConnection.on('error', console.log.bind(console, 'connection error'));
 
 dbConnection.once('open', function () {
-  console.log('connection opened');
+    console.log('connection opened');
 });
 routes(app);
 
