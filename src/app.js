@@ -1,6 +1,7 @@
 import express from 'express';
 import dbConnection from './config/dbConnect.js';
 import routes from './routes/index.js';
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(express.json());
@@ -11,5 +12,18 @@ dbConnection.once('open', function () {
     console.log('connection opened');
 });
 routes(app);
+
+// eslint-disable-next-line no-unused-vars
+app.use(function (error, req, res, next) {
+    if (error instanceof mongoose.Error.CastError) {
+        res.status(400).json({
+            message: 'Bad Request meu chapa',
+        });
+    }
+
+    res.status(404).json({
+        error: `${error.message}`,
+    });
+});
 
 export default app;

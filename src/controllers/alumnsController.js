@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import alumns from '../models/Alumn.js';
 
 class AlumnController {
@@ -14,7 +13,7 @@ class AlumnController {
         }
     };
 
-    static findById = async function (req, res) {
+    static findById = async function (req, res, next) {
         const { id } = req.params;
         try {
             const result = await alumns
@@ -30,15 +29,7 @@ class AlumnController {
                 });
             }
         } catch (error) {
-            if (error instanceof mongoose.Error.CastError) {
-                res.status(400).json({
-                    message: 'Bad Request meu chapa',
-                });
-            }
-
-            res.status(404).json({
-                error: `${error.message}`,
-            });
+            next(error);
         }
     };
 
