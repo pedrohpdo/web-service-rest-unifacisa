@@ -42,6 +42,12 @@ class AlumnController {
                 .find({ professor: idParam })
                 .populate({ path: 'professor', select: 'class' })
                 .exec();
+
+            if (!result.length) {
+                res.status(204).send({
+                    message: 'No Alumns Associated',
+                });
+            }
             res.status(200).json(result);
         } catch (error) {
             res.status(404).json({
