@@ -20,7 +20,14 @@ class AlumnController {
                 .findById(id)
                 .populate({ path: 'professor', select: 'class' })
                 .exec();
-            res.status(200).json(result);
+
+            if (result !== null) {
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({
+                    message: 'Cannot Entity with id: ' + id,
+                });
+            }
         } catch (error) {
             res.status(404).json({
                 error: `${error.message}`,
@@ -31,7 +38,10 @@ class AlumnController {
     static findByParam = async function (req, res) {
         const idParam = req.query.professorId;
         try {
-            const result = await alumns.find({ professor: idParam }).populate({path : 'professor', select : 'class'}).exec();
+            const result = await alumns
+                .find({ professor: idParam })
+                .populate({ path: 'professor', select: 'class' })
+                .exec();
             res.status(200).json(result);
         } catch (error) {
             res.status(404).json({
