@@ -43,9 +43,7 @@ class AlumnController {
 
             res.status(200).json(result);
         } catch (error) {
-            res.status(404).json({
-                error: `${error.message}`,
-            });
+            next(error);
         }
     };
 
@@ -55,9 +53,7 @@ class AlumnController {
             await alumns.create(newAlumn);
             res.status(201).send(newAlumn.toJSON());
         } catch (error) {
-            res.status(500).json({
-                error: `${error.message}`,
-            });
+            next(error);
         }
     };
 
@@ -67,9 +63,7 @@ class AlumnController {
             await alumns.findByIdAndUpdate(id, req.body);
             res.sendStatus(200);
         } catch (error) {
-            res.status(500).json({
-                error: `${error.message}`,
-            });
+            next(error);
         }
     };
 
