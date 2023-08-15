@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import alumns from '../models/Alumn.js';
 
 class AlumnController {
@@ -29,6 +30,12 @@ class AlumnController {
                 });
             }
         } catch (error) {
+            if (error instanceof mongoose.Error.CastError) {
+                res.status(400).json({
+                    message: 'Bad Request meu chapa',
+                });
+            }
+
             res.status(404).json({
                 error: `${error.message}`,
             });
@@ -43,11 +50,6 @@ class AlumnController {
                 .populate({ path: 'professor', select: 'class' })
                 .exec();
 
-            if (!result.length) {
-                res.status(204).send({
-                    message: 'No Alumns Associated',
-                });
-            }
             res.status(200).json(result);
         } catch (error) {
             res.status(404).json({
