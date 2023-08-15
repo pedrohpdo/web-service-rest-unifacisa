@@ -16,14 +16,10 @@ routes(app);
 // eslint-disable-next-line no-unused-vars
 app.use(function (error, req, res, next) {
     if (error instanceof mongoose.Error.CastError) {
-        res.status(400).json({
-            message: 'Bad Request meu chapa',
+        res.status(404).json({
+            error: `${error.message}`,
         });
     }
-
-    res.status(404).json({
-        error: `${error.message}`,
-    });
 });
 
 export default app;
