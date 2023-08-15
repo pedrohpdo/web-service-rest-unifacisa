@@ -14,7 +14,15 @@ class ProfessorController {
         const { id } = req.params;
         try {
             const result = await professors.findById(id).exec();
-            res.status(200).json(result);
+            
+            if(result !== null) {
+                res .status(200).json(result);
+            } else {
+                res.status(200).json({
+                    message : 'Cannot find Entity with id ' + id 
+                });
+            }
+
         } catch (error) {
             res.status(404).json({
                 error: `${error.message}`,
