@@ -2,7 +2,7 @@ import professors from '../models/Professor.js';
 import mongoose from 'mongoose';
 
 class ProfessorController {
-    static findAll = async function (req, res) {
+    static findAll = async (req, res) => {
         try {
             const result = await professors.find({}).exec();
             res.status(200).json(result);
@@ -11,7 +11,7 @@ class ProfessorController {
         }
     };
 
-    static findById = async function (req, res) {
+    static findById = async (req, res) => {
         const { id } = req.params;
         try {
             const result = await professors.findById(id).exec();
@@ -36,7 +36,7 @@ class ProfessorController {
         }
     };
 
-    static insert = async function (req, res) {
+    static insert = async (req, res) => {
         let newProfessor = new professors(req.body);
 
         try {
@@ -49,7 +49,7 @@ class ProfessorController {
         }
     };
 
-    static alter = async function (req, res) {
+    static alter = async (req, res) => {
         const { id } = req.params;
         try {
             await professors.findByIdAndUpdate(id, req.body);
@@ -61,7 +61,7 @@ class ProfessorController {
         }
     };
 
-    static delete = async function (req, res) {
+    static delete = async (req, res) => {
         const { id } = req.params;
 
         try {

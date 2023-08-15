@@ -1,7 +1,7 @@
 import alumns from '../models/Alumn.js';
 
 class AlumnController {
-    static findAll = async function (req, res) {
+    static findAll = async (req, res, next) => {
         try {
             const result = await alumns
                 .find({})
@@ -9,11 +9,11 @@ class AlumnController {
                 .exec();
             res.status(200).json(result);
         } catch (error) {
-            res.status(500).json({ error: `${error.message}` });
+            next(error);
         }
     };
 
-    static findById = async function (req, res, next) {
+    static findById = async (req, res, next) => {
         const { id } = req.params;
         try {
             const result = await alumns
@@ -33,7 +33,7 @@ class AlumnController {
         }
     };
 
-    static findByParam = async function (req, res, next) {
+    static findByParam = async (req, res, next) => {
         const idParam = req.query.professorId;
         try {
             const result = await alumns
@@ -47,7 +47,7 @@ class AlumnController {
         }
     };
 
-    static insert = async function (req, res, next) {
+    static insert = async (req, res, next) => {
         let newAlumn = new alumns(req.body);
         try {
             await alumns.create(newAlumn);
@@ -57,7 +57,7 @@ class AlumnController {
         }
     };
 
-    static alter = async function (req, res, next) {
+    static alter = async (req, res, next) => {
         const id = req.params.id;
         try {
             await alumns.findByIdAndUpdate(id, req.body);
@@ -67,7 +67,7 @@ class AlumnController {
         }
     };
 
-    static delete = async function (req, res) {
+    static delete = async (req, res, next) => {
         const { id } = req.params;
 
         try {
@@ -76,9 +76,7 @@ class AlumnController {
                 message: 'Deleted successfully',
             });
         } catch (error) {
-            res.status(404).json({
-                error: `${error.message}`,
-            });
+            next(error);
         }
     };
 }
