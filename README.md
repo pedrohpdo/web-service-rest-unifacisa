@@ -1,33 +1,27 @@
-# Olá!
+<div align="center">
+  <img alt="Unifacisa" src="https://img.shields.io/badge/Unifacisa-00599C?style=for-the-badge&logo=java&logoColor=white">
+  <img alt="Javascript" src="https://img.shields.io/badge/JavaScript-ED8B00?style=for-the-badge&logo=java&logoColor=white">
+</div>
 
-Com toda certeza, acho que é meu maior desafio até agora na minha aventurinha na TI. A grade da faculdade vai exigir da gente implementar uma API utilizando Node.js para essa próxima competência, então vamos lá entender como usar node 😅.
+# Unifacisa - Criar Serviços Web Com Rest
 
-## A primeira vista,
+Repositório para alocar as aplicações, exercícios e códigos desenvolvidos durante as aulas da competência de Conectar Banco de Dados com POO da Unifacisa.
 
-Um verdadeiro caos (kkkkkkk), pra quem codava em Java até "Um dia desses", senti bem a diferença entre linguagens. Não logicamente, mas sintaticamente. Mas está sendo contornado
+## Getting Started ▶️
 
-## A implementação
+O colaborador deverá possuir credenciais de acesso ao repositório e estar associado ao grupo do projeto.
 
-Não tem tanta complexidade, até o momento segue uma implementação de uma API REST Utilizando Node.js com Express() e MongoDB como base de dados utilizando as funções do CRUD que já conhecemos.
+Todos os pré-requisitos necessários para execução do projeto deverão ser devidamente instalados na máquina local do desenvolvedor.
 
-## Pontos Importantes (Estudos)
+### Pré-requisitos ⚙️
 
-<p>Posso deixar elencando alguns pontos interessantes que acabei me deparando com a implementação dessa api. Como o node utiliza de muitas libs auxiliares que valem a menção, já que segue sendo meu primeiro contato:</p>
+- [Repositório](https://github.com/pedrohpdo/nodeMongoApi)
+- [Node.Js](https://nodejs.org/en)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-### Mongoose
+## Autores 🧑‍💻
 
-<p>
-    Gosto de pensar neme como um Framework para trabalhar com MongoDB dentro do node. Apesar de pouco acostumado, é interessante ver como ele é implementado de maneira bem dinâmica dentro do script. Construir modelos (Ou entidades) acaba sendo intuitivo e prático.
-</p>
-
-[Acesse a documentação do Mongoose](https://mongoosejs.com/)
-
-## Referências;
-
-Com toda certeza, os conteúdos da [Alura](https://www.instagram.com/aluraonline/) estão salvando demais. Completamente objetivo mas sem perder o foco em te dar uma boa base, fora os [infinitos artigos](https://www.alura.com.br/artigos) que eles disponibilizam em sua plataforma, com certeza recomendo.
-
-## Tecnologias Usadas
-
-    Javascript
-    Node.js
-    MongoDB
+- [Darllinson Azevedo](https://github.com/darllinsonazvd)
+- [Pedro Henrique Pereira](https://github.com/pedrohpdo)
+- [Pedro Henrique Santos](https://github.com/pedrohsantosg)
+- [Rafael Macedo](https://github.com/rafaelmacedos)

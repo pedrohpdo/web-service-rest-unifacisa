@@ -11,6 +11,7 @@ dbConnection.on('error', console.log.bind(console, 'connection error'));
 dbConnection.once('open', function () {
     console.log('connection opened');
 });
+
 routes(app);
 
 // eslint-disable-next-line no-unused-vars
