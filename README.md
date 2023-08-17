@@ -17,6 +17,7 @@ Todos os pré-requisitos necessários para execução do projeto deverão ser de
 
 - [Repositório](https://github.com/pedrohpdo/nodeMongoApi)
 - [Node.Js](https://nodejs.org/en)
+- [MongoDB](https://www.mongodb.com/pt-br)
 - [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Autores 🧑‍💻
