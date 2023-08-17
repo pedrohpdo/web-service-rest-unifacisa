@@ -1,6 +1,6 @@
-import Alumns from '../models/Alumn.js'
+import Alumns from '../models/Student.js'
 
-class AlumnController {
+class StudentController {
   static findAll = async (req, res, next) => {
     try {
       const result = await Alumns.find({})
@@ -78,4 +78,4 @@ class AlumnController {
   }
 }
 
-export default AlumnController
+export default StudentController

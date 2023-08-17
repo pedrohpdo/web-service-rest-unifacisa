@@ -3,14 +3,14 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
-const alumnSchema = new Schema({
+const studentSchema = new Schema({
   id: { type: ObjectId },
   name: { type: String, require: true },
   surname: { type: String, require: true },
   mail: { type: String, required: true },
-  professor: { type: Schema.Types.ObjectId, ref: 'Professor', require: true },
+  professor: { type: Schema.Types.ObjectId, ref: 'Teacher', require: true },
 })
 
-const Alumns = mongoose.model('Alumn', alumnSchema)
+const Student = mongoose.model('Student', studentSchema)
 
-export default Alumns
+export default Student
