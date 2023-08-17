@@ -1,8 +1,10 @@
-import { Teacher } from '../models/Teacher.js'
+import express from 'express'
 import mongoose from 'mongoose'
 
+import { Teacher } from '../models/Teacher.ts'
+
 export class TeacherController {
-  static findAll = async (req, res) => {
+  static findAll = async (req: express.Request, res: express.Response) => {
     try {
       const result = await Teacher.find({}).exec()
       res.status(200).json(result)
@@ -11,7 +13,7 @@ export class TeacherController {
     }
   }
 
-  static findById = async (req, res) => {
+  static findById = async (req: express.Request, res: express.Response) => {
     const { id } = req.params
     try {
       const result = await Teacher.findById(id).exec()
@@ -26,42 +28,42 @@ export class TeacherController {
     } catch (error) {
       if (error instanceof mongoose.Error.CastError) {
         res.status(400).json({
-          message: 'Bad Request meu chapa',
+          message: 'Bad Request',
         })
       }
-
-      res.status(404).json({
-        error: `${error.message}`,
-      })
     }
   }
 
-  static insert = async (req, res) => {
+  static insert = async (req: express.Request, res: express.Response) => {
     const newTeacher = new Teacher(req.body)
 
     try {
       await Teacher.create(newTeacher)
       res.status(201).send(newTeacher.toJSON())
     } catch (error) {
-      res.status(500).json({
-        error: `${error.message}`,
-      })
+      if (error instanceof Error) {
+        res.status(500).json({
+          error: `${error.message}`,
+        })
+      }
     }
   }
 
-  static alter = async (req, res) => {
+  static alter = async (req: express.Request, res: express.Response) => {
     const { id } = req.params
     try {
       await Teacher.findByIdAndUpdate(id, req.body)
       res.status(200).send('fé')
     } catch (error) {
-      res.status(500).json({
-        error: `${error.message}`,
-      })
+      if (error instanceof Error) {
+        res.status(500).json({
+          error: `${error.message}`,
+        })
+      }
     }
   }
 
-  static delete = async (req, res) => {
+  static delete = async (req: express.Request, res: express.Response) => {
     const { id } = req.params
 
     try {
@@ -70,9 +72,11 @@ export class TeacherController {
         message: 'Deleted successfully',
       })
     } catch (error) {
-      res.status(404).json({
-        error: `${error.message}`,
-      })
+      if (error instanceof Error) {
+        res.status(500).json({
+          error: `${error.message}`,
+        })
+      }
     }
   }
 }

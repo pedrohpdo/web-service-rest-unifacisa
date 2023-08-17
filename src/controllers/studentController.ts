@@ -1,7 +1,13 @@
-import { Student } from '../models/Student.js'
+import express from 'express'
+
+import { Student } from '../models/Student.ts'
 
 export class StudentController {
-  static findAll = async (req, res, next) => {
+  static findAll = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     try {
       const result = await Student.find({})
         .populate({ path: 'teacher', select: 'class' })
@@ -12,7 +18,11 @@ export class StudentController {
     }
   }
 
-  static findById = async (req, res, next) => {
+  static findById = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     const { id } = req.params
     try {
       const result = await Student.findById(id)
@@ -31,7 +41,11 @@ export class StudentController {
     }
   }
 
-  static findByParam = async (req, res, next) => {
+  static findByParam = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     const idParam = req.query.teacherId
     try {
       const result = await Student.find({ teacher: idParam })
@@ -44,7 +58,11 @@ export class StudentController {
     }
   }
 
-  static insert = async (req, res, next) => {
+  static insert = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     const newStudent = new Student(req.body)
     try {
       await Student.create(newStudent)
@@ -54,7 +72,11 @@ export class StudentController {
     }
   }
 
-  static alter = async (req, res, next) => {
+  static alter = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     const id = req.params.id
     try {
       await Student.findByIdAndUpdate(id, req.body)
@@ -64,7 +86,11 @@ export class StudentController {
     }
   }
 
-  static delete = async (req, res, next) => {
+  static delete = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
     const { id } = req.params
 
     try {

@@ -1,16 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { conn } from './config/dbConnect.js'
-import { routes } from './routes/index.js'
+import { routes } from './routes/index.ts'
+import { conn } from './config/database/connection.ts'
 
 export const app = express()
 app.use(express.json())
 
-conn.on('error', console.log.bind(console, 'connection error'))
+conn.on('error', console.log.bind(console, '❌ Connection error'))
 
-conn.once('open', function () {
-  console.log('connection opened')
+conn.once('open', () => {
+  console.log('🐘 Database connected')
 })
 
 routes(app)
