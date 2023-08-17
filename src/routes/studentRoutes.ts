@@ -1,5 +1,5 @@
 import express from 'express'
-import { StudentController } from '../controllers/studentController.ts'
+import { StudentController } from '../controllers/studentController'
 
 export const studentRouter = express.Router()
 studentRouter.get('/students', StudentController.findAll)

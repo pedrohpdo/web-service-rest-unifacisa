@@ -1,8 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { routes } from './routes/index.ts'
-import { conn } from './config/database/connection.ts'
+import { routes } from './routes/index'
+import { conn } from './config/database/connection'
 
 export const app = express()
 app.use(express.json())

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { Student } from '../models/Student.ts'
+import { Student } from '../models/Student'
 
 export class StudentController {
   static findAll = async (

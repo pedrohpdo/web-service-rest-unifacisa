@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { Teacher } from '../models/Teacher.ts'
+import { Teacher } from '../models/Teacher'
 
 export class TeacherController {
   static findAll = async (req: express.Request, res: express.Response) => {
