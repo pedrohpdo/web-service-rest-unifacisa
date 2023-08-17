@@ -1,10 +1,10 @@
-import Alumns from '../models/Student.js'
+import { Student } from '../models/Student.js'
 
-class StudentController {
+export class StudentController {
   static findAll = async (req, res, next) => {
     try {
-      const result = await Alumns.find({})
-        .populate({ path: 'professor', select: 'class' })
+      const result = await Student.find({})
+        .populate({ path: 'teacher', select: 'class' })
         .exec()
       res.status(200).json(result)
     } catch (error) {
@@ -15,8 +15,8 @@ class StudentController {
   static findById = async (req, res, next) => {
     const { id } = req.params
     try {
-      const result = await Alumns.findById(id)
-        .populate({ path: 'professor', select: 'class' })
+      const result = await Student.findById(id)
+        .populate({ path: 'teacher', select: 'class' })
         .exec()
 
       if (result !== null) {
@@ -32,10 +32,10 @@ class StudentController {
   }
 
   static findByParam = async (req, res, next) => {
-    const idParam = req.query.professorId
+    const idParam = req.query.teacherId
     try {
-      const result = await Alumns.find({ professor: idParam })
-        .populate({ path: 'professor', select: 'class' })
+      const result = await Student.find({ teacher: idParam })
+        .populate({ path: 'teacher', select: 'class' })
         .exec()
 
       res.status(200).json(result)
@@ -45,10 +45,10 @@ class StudentController {
   }
 
   static insert = async (req, res, next) => {
-    const newAlumn = new Alumns(req.body)
+    const newStudent = new Student(req.body)
     try {
-      await Alumns.create(newAlumn)
-      res.status(201).send(newAlumn.toJSON())
+      await Student.create(newStudent)
+      res.status(201).send(newStudent.toJSON())
     } catch (error) {
       next(error)
     }
@@ -57,7 +57,7 @@ class StudentController {
   static alter = async (req, res, next) => {
     const id = req.params.id
     try {
-      await Alumns.findByIdAndUpdate(id, req.body)
+      await Student.findByIdAndUpdate(id, req.body)
       res.sendStatus(200)
     } catch (error) {
       next(error)
@@ -68,7 +68,7 @@ class StudentController {
     const { id } = req.params
 
     try {
-      await Alumns.findByIdAndDelete(id)
+      await Student.findByIdAndDelete(id)
       res.status(204).json({
         message: 'Deleted successfully',
       })
@@ -77,5 +77,3 @@ class StudentController {
     }
   }
 }
-
-export default StudentController

@@ -10,6 +10,4 @@ const teacherSchema = new Schema({
   mail: { type: String },
 })
 
-const teacher = mongoose.model('Teacher', teacherSchema)
-
-export default teacher
+export const Teacher = mongoose.model('Teacher', teacherSchema)

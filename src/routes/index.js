@@ -1,9 +1,7 @@
 import express from 'express'
-import studentRoutes from './studentRoutes.js'
-import teacherRoutes from './teacherRoutes.js'
+import { studentRouter } from './studentRoutes.js'
+import { teacherRouter } from './teacherRoutes.js'
 
-const routes = (app) => {
-  app.use(express.json(), studentRoutes, teacherRoutes)
+export const routes = (app) => {
+  app.use(express.json(), studentRouter, teacherRouter)
 }
-
-export default routes

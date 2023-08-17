@@ -1,11 +1,10 @@
 import express from 'express'
-import StudentController from '../controllers/studentController.js'
+import { StudentController } from '../controllers/studentController.js'
 
-const router = express.Router()
-router.get('/student', StudentController.findAll)
-router.get('/student/search', StudentController.findByParam)
-router.get('/student/:id', StudentController.findById)
-router.post('/student', StudentController.insert)
-router.put('/student/:id', StudentController.alter)
-router.delete('/student/:id', StudentController.delete)
-export default router
+export const studentRouter = express.Router()
+studentRouter.get('/students', StudentController.findAll)
+studentRouter.get('/students/search', StudentController.findByParam)
+studentRouter.get('/students/:id', StudentController.findById)
+studentRouter.post('/student', StudentController.insert)
+studentRouter.put('/student/:id', StudentController.alter)
+studentRouter.delete('/student/:id', StudentController.delete)

@@ -1,10 +1,10 @@
-import teacher from '../models/Teacher.js'
+import { Teacher } from '../models/Teacher.js'
 import mongoose from 'mongoose'
 
-class teacherController {
+export class TeacherController {
   static findAll = async (req, res) => {
     try {
-      const result = await teacher.find({}).exec()
+      const result = await Teacher.find({}).exec()
       res.status(200).json(result)
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' })
@@ -14,7 +14,7 @@ class teacherController {
   static findById = async (req, res) => {
     const { id } = req.params
     try {
-      const result = await teacher.findById(id).exec()
+      const result = await Teacher.findById(id).exec()
 
       if (result !== null) {
         res.status(200).json(result)
@@ -37,11 +37,11 @@ class teacherController {
   }
 
   static insert = async (req, res) => {
-    const newProfessor = new teacher(req.body)
+    const newTeacher = new Teacher(req.body)
 
     try {
-      await teacher.create(newProfessor)
-      res.status(201).send(newProfessor.toJSON())
+      await Teacher.create(newTeacher)
+      res.status(201).send(newTeacher.toJSON())
     } catch (error) {
       res.status(500).json({
         error: `${error.message}`,
@@ -52,7 +52,7 @@ class teacherController {
   static alter = async (req, res) => {
     const { id } = req.params
     try {
-      await teacher.findByIdAndUpdate(id, req.body)
+      await Teacher.findByIdAndUpdate(id, req.body)
       res.status(200).send('fé')
     } catch (error) {
       res.status(500).json({
@@ -65,7 +65,7 @@ class teacherController {
     const { id } = req.params
 
     try {
-      await teacher.findByIdAndDelete(id)
+      await Teacher.findByIdAndDelete(id)
       res.status(204).json({
         message: 'Deleted successfully',
       })
@@ -76,5 +76,3 @@ class teacherController {
     }
   }
 }
-
-export default teacherController
