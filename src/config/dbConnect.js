@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-mongoose.connect(process.env.URI_CONNECTION_DB);
+mongoose.connect(process.env.URI_CONNECTION_DB)
 
-const dbConnection = mongoose.connection;
+const dbConnection = mongoose.connection
 
-export default dbConnection;
+export default dbConnection
