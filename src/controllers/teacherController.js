@@ -1,10 +1,10 @@
-import Professors from '../models/Professor.js'
+import teacher from '../models/Teacher.js'
 import mongoose from 'mongoose'
 
-class ProfessorController {
+class teacherController {
   static findAll = async (req, res) => {
     try {
-      const result = await Professors.find({}).exec()
+      const result = await teacher.find({}).exec()
       res.status(200).json(result)
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' })
@@ -14,7 +14,7 @@ class ProfessorController {
   static findById = async (req, res) => {
     const { id } = req.params
     try {
-      const result = await Professors.findById(id).exec()
+      const result = await teacher.findById(id).exec()
 
       if (result !== null) {
         res.status(200).json(result)
@@ -37,10 +37,10 @@ class ProfessorController {
   }
 
   static insert = async (req, res) => {
-    const newProfessor = new Professors(req.body)
+    const newProfessor = new teacher(req.body)
 
     try {
-      await Professors.create(newProfessor)
+      await teacher.create(newProfessor)
       res.status(201).send(newProfessor.toJSON())
     } catch (error) {
       res.status(500).json({
@@ -52,7 +52,7 @@ class ProfessorController {
   static alter = async (req, res) => {
     const { id } = req.params
     try {
-      await Professors.findByIdAndUpdate(id, req.body)
+      await teacher.findByIdAndUpdate(id, req.body)
       res.status(200).send('fé')
     } catch (error) {
       res.status(500).json({
@@ -65,7 +65,7 @@ class ProfessorController {
     const { id } = req.params
 
     try {
-      await Professors.findByIdAndDelete(id)
+      await teacher.findByIdAndDelete(id)
       res.status(204).json({
         message: 'Deleted successfully',
       })
@@ -77,4 +77,4 @@ class ProfessorController {
   }
 }
 
-export default ProfessorController
+export default teacherController

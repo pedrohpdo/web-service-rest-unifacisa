@@ -1,9 +1,9 @@
 import express from 'express'
-import alumn from './alumnsRoutes.js'
-import professors from './professorRoutes.js'
+import studentRoutes from './studentRoutes.js'
+import teacherRoutes from './teacherRoutes.js'
 
 const routes = (app) => {
-  app.use(express.json(), alumn, professors)
+  app.use(express.json(), studentRoutes, teacherRoutes)
 }
 
 export default routes

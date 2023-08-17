@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
-const professorSchema = new Schema({
+const teacherSchema = new Schema({
   id: { type: ObjectId },
   name: { type: String },
   surname: { type: String },
@@ -10,6 +10,6 @@ const professorSchema = new Schema({
   mail: { type: String },
 })
 
-const Professors = mongoose.model('Professor', professorSchema)
+const teacher = mongoose.model('Teacher', teacherSchema)
 
-export default Professors
+export default teacher
