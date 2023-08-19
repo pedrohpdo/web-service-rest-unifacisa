@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import { routes } from './routes/index'
 import { conn } from './config/database/connection'
 import { ErrorResponse } from './error/errorResponse'
+import { NotFountEntityError } from './error/notFoundEntityError'
 
 export const app = express()
 app.use(express.json())
@@ -36,9 +37,11 @@ app.use(
         'Cannot create entity. Some data is required',
         422,
       ).buildValidationResponse(res, err)
+    } else if (err instanceof NotFountEntityError) {
+      new NotFountEntityError(err.message).buildResponse(res)
     } else {
       new ErrorResponse(
-        'Bad request',
+        'Server Error',
         'Internal Server Error',
         500,
       ).buildResponse(res)

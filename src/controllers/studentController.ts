@@ -1,6 +1,7 @@
 import express from 'express'
 
 import { Student } from '../models/Student'
+import { NotFountEntityError } from '../error/notFoundEntityError'
 
 export class StudentController {
   static findAll = async (
@@ -29,13 +30,10 @@ export class StudentController {
         .populate({ path: 'teacher', select: 'class' })
         .exec()
 
-      if (result !== null) {
-        res.status(200).json(result)
-      } else {
-        res.status(404).json({
-          message: 'Cannot Entity with id: ' + id,
-        })
+      if (result === null) {
+        throw new NotFountEntityError(`Cannot find Student with id: ${id}`)
       }
+      res.status(200).json(result)
     } catch (error) {
       next(error)
     }
