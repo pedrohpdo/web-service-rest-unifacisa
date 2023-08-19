@@ -1,49 +1,44 @@
 import express from 'express'
-import { Error } from 'mongoose'
+import mongoose from 'mongoose'
 
-export const errorResponse = async (
-  res: express.Response,
-  nameError: string,
-  statusCode: number,
-  messageError: string,
-) => {
-  await res.status(statusCode).json({
-    status: statusCode,
-    error: nameError,
-    message: messageError,
-    timestamp: new Date(),
-  })
-}
+export class ErrorResponse extends Error {
+  status: number
 
-export const castErrorResponse = async (
-  res: express.Response,
-  err: Error.CastError,
-) => {
-  await res.status(422).json({
-    status: 422,
-    error: 'Cast Error',
-    message: `Cast key: ${err.path} failed for value ${err.value}`,
-    timestamp: new Date(),
-  })
-}
+  constructor(name: string, message: string, status: number) {
+    super()
+    this.name = name
+    this.message = message
+    this.status = status
+  }
 
-export const validationError = async (
-  res: express.Response,
-  err: Error.ValidationError,
-) => {
-  const pathError: { path: string; status: any }[] = []
-  const errors = Object.values(err.errors).forEach((error) => {
-    pathError.push({
-      path: error.path,
-      status: error.kind,
+  buildResponse = async (res: express.Response) => {
+    res.status(this.status).json({
+      status: this.status,
+      name: this.name,
+      message: this.message,
+      timestamp: new Date(),
     })
-  })
+  }
 
-  res.status(400).json({
-    status: 400,
-    name: 'Validation Error',
-    message: 'Cannot create entity. Some data is required',
-    details: pathError,
-    timestamp: new Date(),
-  })
+  buildValidationResponse = async (
+    res: express.Response,
+    err: mongoose.Error.ValidationError,
+  ) => {
+    const pathError: { field: string; fieldStatus: string }[] = []
+
+    Object.values(err.errors).forEach((error) => {
+      pathError.push({
+        field: error.path,
+        fieldStatus: error.kind,
+      })
+    })
+
+    res.status(400).json({
+      status: 400,
+      name: 'Validation Error',
+      message: 'Cannot create entity. Some data is required',
+      details: pathError,
+      timestamp: new Date(),
+    })
+  }
 }

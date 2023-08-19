@@ -3,11 +3,7 @@ import mongoose from 'mongoose'
 
 import { routes } from './routes/index'
 import { conn } from './config/database/connection'
-import {
-  errorResponse,
-  castErrorResponse,
-  validationError,
-} from './error/errorResponse'
+import { ErrorResponse } from './error/errorResponse'
 
 export const app = express()
 app.use(express.json())
@@ -29,11 +25,27 @@ app.use(
     next: express.NextFunction,
   ) => {
     if (err instanceof mongoose.Error.CastError) {
-      castErrorResponse(res, err)
+      new ErrorResponse(
+        'Cast Error',
+        `Unprocessable path: ${err.path} for value: ${err.value}`,
+        422,
+      ).buildResponse(res)
+      // castErrorResponse(res, err)
     } else if (err instanceof mongoose.Error.ValidationError) {
-      validationError(res, err)
+      new ErrorResponse(
+        'Validation Error',
+        'Cannot create entity. Some data is required',
+        422,
+      ).buildValidationResponse(res, err)
+      // validationError(res, err)
     } else {
-      errorResponse(res, 'Server Error', 500, err.message)
+      new ErrorResponse(
+        'Bad request',
+        'Internal Server Error',
+        500,
+      ).buildResponse(res)
+
+      // errorResponse(res, 'Server Error', 500, err.message)
     }
   },
 )
