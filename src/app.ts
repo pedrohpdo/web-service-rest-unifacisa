@@ -3,6 +3,11 @@ import mongoose from 'mongoose'
 
 import { routes } from './routes/index'
 import { conn } from './config/database/connection'
+import {
+  errorResponse,
+  castErrorResponse,
+  validationError,
+} from './error/errorResponse'
 
 export const app = express()
 app.use(express.json())
@@ -24,12 +29,11 @@ app.use(
     next: express.NextFunction,
   ) => {
     if (err instanceof mongoose.Error.CastError) {
-      res.status(422).json({ message: `${err.message}` })
+      castErrorResponse(res, err)
     } else if (err instanceof mongoose.Error.ValidationError) {
-      const errors = Object.values(err.errors).map((erro) => erro.message)
-      res.status(400).json({ message: `${errors}` })
+      validationError(res, err)
     } else {
-      res.status(500).json({ error: `${err.name}` })
+      errorResponse(res, 'Server Error', 500, err.message)
     }
   },
 )
