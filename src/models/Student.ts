@@ -5,8 +5,8 @@ const ObjectId = Schema.ObjectId
 
 const studentSchema = new Schema({
   id: { type: ObjectId },
-  name: { type: String, require: true },
-  surname: { type: String, require: true },
+  name: { type: String, required: true },
+  surname: { type: String, required: true },
   mail: { type: String, required: true },
   teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', require: true },
 })
