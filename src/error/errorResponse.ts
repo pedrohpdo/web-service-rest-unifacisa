@@ -41,7 +41,7 @@ export const validationError = async (
 
   res.status(400).json({
     status: 400,
-    error: 'Validation Error',
+    name: 'Validation Error',
     message: 'Cannot create entity. Some data is required',
     details: pathError,
     timestamp: new Date(),
