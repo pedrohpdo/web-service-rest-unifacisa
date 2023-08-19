@@ -30,22 +30,18 @@ app.use(
         `Unprocessable path: ${err.path} for value: ${err.value}`,
         422,
       ).buildResponse(res)
-      // castErrorResponse(res, err)
     } else if (err instanceof mongoose.Error.ValidationError) {
       new ErrorResponse(
         'Validation Error',
         'Cannot create entity. Some data is required',
         422,
       ).buildValidationResponse(res, err)
-      // validationError(res, err)
     } else {
       new ErrorResponse(
         'Bad request',
         'Internal Server Error',
         500,
       ).buildResponse(res)
-
-      // errorResponse(res, 'Server Error', 500, err.message)
     }
   },
 )
