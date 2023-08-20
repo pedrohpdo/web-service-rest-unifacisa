@@ -32,8 +32,8 @@ app.use(
     if (err instanceof mongoose.Error.CastError) {
       new ErrorResponse(
         'Cast Error',
-        `Unprocessable path: ${err.path} for value: ${err.value}`,
-        422,
+        `Unprocessable path [${err.path}] for value: ${err.value}`,
+        404,
       ).buildResponse(res)
     } else if (err instanceof mongoose.Error.ValidationError) {
       new ErrorResponse(
@@ -42,9 +42,9 @@ app.use(
         422,
       ).buildValidationResponse(res, err)
     } else if (err instanceof NotFountEntityError) {
-      new NotFountEntityError(err.message).buildResponse(res)
+      err.buildResponse(res)
     } else if (err instanceof NotFoundPageError) {
-      new NotFoundPageError().buildResponse(res)
+      err.buildResponse(res)
     } else {
       new ErrorResponse(
         'Server Error',
