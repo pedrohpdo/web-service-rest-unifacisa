@@ -59,7 +59,10 @@ export class TeacherController {
     const { id } = req.params
     try {
       await Teacher.findByIdAndUpdate(id, req.body)
-      res.status(200).send('fé')
+      res.sendStatus(200).json({
+        status: 200,
+        message: 'Professor updated successfully',
+      })
     } catch (error) {
       next(error)
     }
