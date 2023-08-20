@@ -5,6 +5,7 @@ import { routes } from './routes/index'
 import { conn } from './config/database/connection'
 import { ErrorResponse } from './error/errorResponse'
 import { NotFountEntityError } from './error/notFoundEntityError'
+import { NotFoundPageError } from './error/notFoundPageError'
 
 export const app = express()
 app.use(express.json())
@@ -16,6 +17,9 @@ conn.once('open', () => {
 })
 
 routes(app)
+app.use((req: express.Request, res: express.Response) => {
+  new NotFoundPageError().buildResponse(res)
+})
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(
@@ -39,6 +43,8 @@ app.use(
       ).buildValidationResponse(res, err)
     } else if (err instanceof NotFountEntityError) {
       new NotFountEntityError(err.message).buildResponse(res)
+    } else if (err instanceof NotFoundPageError) {
+      new NotFoundPageError().buildResponse(res)
     } else {
       new ErrorResponse(
         'Server Error',
