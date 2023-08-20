@@ -16,7 +16,7 @@ const studentSchema = new Schema({
       },
     },
   },
-  teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', require: true },
+  teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', required: true },
 })
 
 export const Student = mongoose.model('Student', studentSchema)
