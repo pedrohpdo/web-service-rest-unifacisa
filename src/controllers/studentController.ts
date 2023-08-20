@@ -31,7 +31,7 @@ export class StudentController {
         .exec()
 
       if (result === null) {
-        throw new NotFountEntityError(`Cannot find Student with id: ${id}`)
+        throw new NotFountEntityError(id)
       }
       res.status(200).json(result)
     } catch (error) {

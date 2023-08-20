@@ -1,7 +1,7 @@
 import { ErrorResponse } from './errorResponse'
 
 export class NotFountEntityError extends ErrorResponse {
-  constructor(message: string) {
-    super('Not Found Entity', message, 404)
+  constructor(id: string) {
+    super('Not Found Entity Error', `Cannot find Student with id: ${id}`, 404)
   }
 }
