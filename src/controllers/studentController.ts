@@ -44,11 +44,15 @@ export class StudentController {
     res: express.Response,
     next: express.NextFunction,
   ) => {
-    const idParam = req.query.teacherId
+    const idParam: any = req.query.teacherId
     try {
       const result = await Student.find({ teacher: idParam })
         .populate({ path: 'teacher', select: 'class' })
         .exec()
+
+      if (!result.length) {
+        throw new NotFountEntityError(idParam)
+      }
 
       res.status(200).json(result)
     } catch (error) {
@@ -78,7 +82,7 @@ export class StudentController {
     const id = req.params.id
     try {
       await Student.findByIdAndUpdate(id, req.body)
-      res.sendStatus(200).json({
+      res.status(200).json({
         status: 200,
         message: 'Student updated successfully',
       })
@@ -93,8 +97,10 @@ export class StudentController {
     next: express.NextFunction,
   ) => {
     const { id } = req.params
-
     try {
+      if ((await Student.findById(id).exec()) === null) {
+        throw new NotFountEntityError(id)
+      }
       await Student.findByIdAndDelete(id)
       res.status(204).json({
         message: 'Deleted successfully',
